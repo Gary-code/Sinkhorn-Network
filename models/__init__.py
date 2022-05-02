@@ -1,0 +1,1 @@
+from .sorting_network import SinkhornNetwork
