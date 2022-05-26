@@ -79,7 +79,7 @@ with torch.no_grad():
                 references.append([' '.join(words)])
 
         with open('result_seq_pred.txt', 'w') as f:
-            for r in tqdm(hypotheses):
+            for r in tqdm(gt_ind):
                 words = [idx2word[i] for i in r]
                 f.write(' '.join(words) + '\n')
                 hypotheses.append([' '.join(words)])

@@ -2,7 +2,15 @@
 
 > [introduction blog](https://zhuanlan.zhihu.com/p/76742946)
 
-This is a Sinkhorn Network model implementation with Pytorch refer to [paper]().  Here is the official [tensorflow implementation](https://github.com/google/gumbel_sinkhorn).
+This is a simple Sinkhorn Network model implementation with Pytorch refer to [paper](https://openreview.net/pdf?id=Byt3oJ-0W).  Here is the official [tensorflow implementation](https://github.com/google/gumbel_sinkhorn).
+
+Our Task
+* Sorting the object permutations.
+
+
+![img](https://pic2.zhimg.com/80/v2-ce93fdbebae3c4991de6303f9143d355_720w.jpg)
+
+![img](https://pic2.zhimg.com/80/v2-b647a176a42547659da525898e00e511_720w.jpg)
 
 
 
@@ -13,14 +21,12 @@ model file:
 dataset: 
 * [folder: ./data/datasets/sentence_pairs.json](./data/datasets/sentence_pairs.json)
 
-Task
-* sorting the object permutations.
-
 ## Data Preprocess
 ```angular2html
 cd ./data
 python prepor.py
 ```
+After this step, train, validation and test data will generate under the `./data/datasets` folder.
 
 ## Main Process
 
@@ -30,13 +36,7 @@ python train.py
 ```
 Test
 ```python
-python test
+python test.py
 ```
-
-
-![img](https://pic2.zhimg.com/80/v2-ce93fdbebae3c4991de6303f9143d355_720w.jpg)
-
-![img](https://pic2.zhimg.com/80/v2-b647a176a42547659da525898e00e511_720w.jpg)
-
 
 
