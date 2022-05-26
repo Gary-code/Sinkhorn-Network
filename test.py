@@ -1,5 +1,5 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 import torch
 from torch import nn
@@ -28,14 +28,15 @@ file_result = os.path.join('result', str(epo))
 file_score = os.path.join('score', str(epo))
 
 
-load_model = os.path.join('./save/', str(epo) + '_-1.tar')
+load_model = os.path.join('./save/', 'best_checkpoint.pth.tar')
 classes = []
+
 with open('./data/object_class_list.txt', 'r') as f:
     for object in f.readlines():
         classes.append(object.split(',')[0].lower().strip())
 
 
-classes.append("unknown")
+classes.append("<pad>")
 
 checkpoint = torch.load(load_model, map_location=torch.device("cpu"))
 
@@ -67,6 +68,25 @@ with torch.no_grad():
         f_result.close()
         num_all += len(det_ind)
         equal_num += (pre_seq_ind == gt_ind).all(dim=1).sum()
+        # true obj seq & pred obj seq
+        references = []
+        hypotheses = []
+        idx2word = {index: word for word, index in enumerate(classes)}
+        with open('result_seq_true.txt', 'w') as f:
+            for r in tqdm(det_ind):
+                words = [idx2word[i] for i in r]
+                f.write(' '.join(words) + '\n')
+                references.append([' '.join(words)])
+
+        with open('result_seq_pred.txt', 'w') as f:
+            for r in tqdm(hypotheses):
+                words = [idx2word[i] for i in r]
+                f.write(' '.join(words) + '\n')
+                hypotheses.append([' '.join(words)])
+        print(hypotheses[:5])
+        print(references[:5])
+
+
 acc = equal_num / num_all
 f_score = open(file_score + '.txt', 'a')
 f_score.write("test loss:" + str(acc_local_loss / len(test_loader)))

@@ -2,13 +2,13 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
-class SinkhornNetwork(nn.Module):
 
+class SinkhornNetwork(nn.Module):
     def __init__(self, N, n_iters, tau):
         """
         :param N: N degree vector
         :param n_iters:  iteration times
-        :param tau:
+        :param tau: hyperparameter
         """
         super(SinkhornNetwork, self).__init__()
         self.n_iters = n_iters

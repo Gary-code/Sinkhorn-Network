@@ -2,11 +2,11 @@ import csv
 import json
 import os
 
-"""
-split train and test set
-"""
 
-def main():
+def split_train_val_test():
+    """
+    split train and test set
+    """
     out = []
     outtest = []
     outval = []
@@ -34,4 +34,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    split_train_val_test()
